@@ -29,7 +29,7 @@ export function Guild({ data, ...rest }: Props) {
       activeOpacity={0.8}
       {...rest}
     >
-      <GuildIcon />
+      <GuildIcon guildId={data.id} iconId={data.icon} />
 
       <View style={styles.content}>
         <View>

@@ -96,21 +96,16 @@ export function AppointmentDetails() {
     const data = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
     const appointments: AppointmentProps[] = data ? JSON.parse(data) : [];
 
-    const index = appointments.findIndex((item, index) => {
-      if (item.id === guildSelected.id) {
-        return index;
+    const updatedAppointments: AppointmentProps[] = [];
+    
+    appointments.forEach(item => {
+      if (item && item.id !== guildSelected.id) {
+        return updatedAppointments.push(item);
       }
     });
-    
-    console.log(index);
 
-    if (index >= 0){
-      delete appointments[index];
-      await AsyncStorage.setItem(COLLECTION_APPOINTMENTS, JSON.stringify(appointments));
-      navigation.navigate('Home');
-    } else {
-      throw Error;
-    }    
+    await AsyncStorage.setItem(COLLECTION_APPOINTMENTS, JSON.stringify(updatedAppointments));
+    navigation.navigate('Home'); 
   }
 
   useEffect(() => {

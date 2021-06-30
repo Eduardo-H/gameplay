@@ -44,8 +44,6 @@ export function Home() {
       setAppointments(storage.filter(item => item != null));
     }
 
-    console.log(storage)
-
     setLoading(false);
   }
 
